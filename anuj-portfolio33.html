@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anuj Pandit - Content Creator & Writer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0ff;
+            --secondary: #00d9ff;
+            --accent: #ff00ff;
+            --purple: #8b5cf6;
+            --pink: #ec4899;
+            --dark-bg: #0a0e27;
+            --darker-bg: #050812;
+            --glass-bg: rgba(15, 23, 42, 0.7);
+            --glow: 0 0 20px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+            color: #e0e7ff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(5, 8, 18, 0.6);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e0e7ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 80px;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            width: 100%;
+            padding: 2rem;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow-text 3s ease-in-out infinite;
+        }
+
+        @keyframes glow-text {
+            0%, 100% { text-shadow: 0 0 20px rgba(0, 255, 255, 0.3); }
+            50% { text-shadow: 0 0 40px rgba(255, 0, 255, 0.5); }
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .hero-text .description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #a0aec0;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            transition: left 0.3s ease;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn.primary {
+            background: var(--primary);
+            color: var(--darker-bg);
+            border-color: var(--primary);
+        }
+
+        /* Hero Image */
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-frame {
+            position: relative;
+            width: 350px;
+            height: 450px;
+            border: 3px solid var(--primary);
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.3), 0 0 80px rgba(255, 0, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-frame::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(0, 255, 255, 0.1) 50%, transparent 70%);
+            animation: shine 3s infinite;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Sections */
+        section {
+            position: relative;
+            z-index: 2;
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .about-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .about-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .about-card p {
+            color: #a0aec0;
+            line-height: 1.8;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .skill-card:hover::before {
+            left: 100%;
+        }
+
+        .skill-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+            transform: translateY(-10px);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-card p {
+            color: #a0aec0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 0, 255, 0.3);
+            padding: 2.5rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 40px rgba(255, 0, 255, 0.4), 0 0 20px rgba(0, 255, 255, 0.2);
+            transform: translateY(-10px);
+        }
+
+        .service-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .service-card p {
+            color: #a0aec0;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        /* Portfolio Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            transform: translateY(-10px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-category {
+            color: var(--primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card h3 {
+            color: #e0e7ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card p {
+            color: #a0aec0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .project-btn {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .project-btn:hover {
+            transform: translateX(5px);
+        }
+
+        /* YouTube Section */
+        .youtube-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 0, 127, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .youtube-section h3 {
+            color: #ff007f;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .youtube-placeholder {
+            width: 100%;
+            max-width: 600px;
+            height: 340px;
+            background: linear-gradient(135deg, rgba(255, 0, 127, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px dashed rgba(255, 0, 127, 0.3);
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            font-size: 4rem;
+        }
+
+        /* Social Section */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            color: var(--primary);
+            text-decoration: none;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .social-btn:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+            transform: translateY(-5px) scale(1.1);
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 2.5rem;
+            border-radius: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #e0e7ff;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Dashboard Section */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .dashboard-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .dashboard-card h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-card p {
+            color: #a0aec0;
+            font-size: 0.85rem;
+        }
+
+        /* Tools Section */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tool-card {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tool-card:hover {
+            border-color: var(--purple);
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .tool-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-card h4 {
+            color: var(--purple);
+            margin-bottom: 0.3rem;
+        }
+
+        .tool-card p {
+            color: #a0aec0;
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Responsive */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+
+            .image-frame {
+                width: 280px;
+                height: 350px;
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+            color: #a0aec0;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">ANUJ PANDIT</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#creator">Creator</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Hi, I'm Anuj Pandit</h1>
+                <p class="subtitle">Content Creator • Writer • Video Editor • Social Media Creator</p>
+                <p class="description">I'm Anuj Pandit, a creative content creator and writer passionate about storytelling, digital media, video, and building engaging experiences for audiences across platforms.</p>
+                <div class="hero-buttons">
+                    <a href="#portfolio" class="btn primary">View My Work</a>
+                    <a href="#contact" class="btn">Contact Me</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="image-frame">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='350' height='450'%3E%3Crect fill='%23142340' width='350' height='450'/%3E%3Ctext x='175' y='225' font-size='60' fill='%2300ffff' text-anchor='middle' dominant-baseline='middle'%3E👤%3C/text%3E%3C/svg%3E" alt="Profile">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-grid">
+            <div>
+                <div class="about-card">
+                    <h3>🎬 Who I Am</h3>
+                    <p>I'm a creative professional specializing in content creation, writing, and digital media. With expertise in video editing, social media strategy, and YouTube content production, I help brands and creators tell compelling stories that resonate with audiences.</p>
+                </div>
+                <div class="about-card">
+                    <h3>💼 What I Do</h3>
+                    <p>Content Creation | Video Editing | Writing | Social Media Strategy | YouTube Production | Digital Storytelling</p>
+                </div>
+            </div>
+            <div>
+                <div class="about-card">
+                    <h3>🎓 Education</h3>
+                    <p><strong>BBS Degree</strong></p>
+                    <p style="margin-top: 1rem; color: #a0aec0;">Continuous learner in digital media, content strategy, and creative technologies.</p>
+                </div>
+                <div class="about-card">
+                    <h3>🚀 Mission</h3>
+                    <p>Creating authentic, engaging content that connects creators with their audiences and drives meaningful digital experiences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">📱</div>
+                <h3>Content Creation</h3>
+                <p>Developing engaging digital content from concept to final publication across all platforms.</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">✍️</div>
+                <h3>Writing</h3>
+                <p>Creative writing, scripts, storytelling, captions and digital content with authentic voice.</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🎬</div>
+                <h3>Video Editing</h3>
+                <p>Editing engaging videos with pacing, transitions, storytelling and visual effects.</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">📊</div>
+                <h3>Social Media</h3>
+                <p>Creating and managing engaging social-first content tailored for each platform.</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">▶️</div>
+                <h3>YouTube</h3>
+                <p>Developing video concepts, scripts, edits and content strategy for YouTube audiences.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2 class="section-title">Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>📹 Content Creation</h3>
+                <p>Creative digital content designed to engage audiences and drive results. From concept to publication.</p>
+            </div>
+            <div class="service-card">
+                <h3>📝 Script & Creative Writing</h3>
+                <p>Scripts, captions, stories, articles and other creative writing that captivates and converts.</p>
+            </div>
+            <div class="service-card">
+                <h3>✂️ Video Editing</h3>
+                <p>Professional editing for YouTube, social media and digital content with cinematic quality.</p>
+            </div>
+            <div class="service-card">
+                <h3>🌐 Social Media Content</h3>
+                <p>Creative content designed specifically for social platforms with trending hooks and engagement focus.</p>
+            </div>
+            <div class="service-card">
+                <h3>▶️ YouTube Content</h3>
+                <p>Complete YouTube-focused creative support including concepts, writing, editing and presentation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <h2 class="section-title">Selected Work</h2>
+        <div class="portfolio-grid">
+            <div class="project-card">
+                <div class="project-image">📝</div>
+                <div class="project-content">
+                    <p class="project-category">Writing</p>
+                    <h3>Creative Writing Showcase</h3>
+                    <p>Collection of scripts, stories and content pieces demonstrating storytelling excellence.</p>
+                    <a href="#" class="project-btn">View Project →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">📝</div>
+                <div class="project-content">
+                    <p class="project-category">Writing</p>
+                    <h3>Social Media Scripts</h3>
+                    <p>Viral scripts and captions tailored for social media platforms and audiences.</p>
+                    <a href="#" class="project-btn">View Project →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">📱</div>
+                <div class="project-content">
+                    <p class="project-category">Social Media</p>
+                    <h3>Content Campaigns</h3>
+                    <p>Multi-platform content campaigns driving engagement and brand awareness.</p>
+                    <a href="#" class="project-btn">View Project →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">📱</div>
+                <div class="project-content">
+                    <p class="project-category">Social Media</p>
+                    <h3>Brand Activation</h3>
+                    <p>Creative social media strategies and content for brand growth and engagement.</p>
+                    <a href="#" class="project-btn">View Project →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">🎬</div>
+                <div class="project-content">
+                    <p class="project-category">Video</p>
+                    <h3>Video Productions</h3>
+                    <p>High-quality video content creation and editing for various platforms.</p>
+                    <a href="#" class="project-btn">View Project →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- YouTube/Creator Section -->
+    <section class="creator" id="creator">
+        <h2 class="section-title">Creator Hub</h2>
+        <div class="youtube-section">
+            <h3>📺 My YouTube Channels</h3>
+            <div class="youtube-placeholder">▶️</div>
+            <p style="color: #a0aec0; margin-bottom: 1.5rem;">Check out my YouTube channels for exclusive content, behind-the-scenes, and creative projects.</p>
+            <a href="https://youtube.com" target="_blank" class="btn primary">Visit My YouTube</a>
+        </div>
+    </section>
+
+    <!-- Social Section -->
+    <section class="social" id="social">
+        <h2 class="section-title">Connect With Me</h2>
+        <div class="social-links">
+            <a href="https://youtube.com" class="social-btn" title="YouTube">▶</a>
+            <a href="https://instagram.com" class="social-btn" title="Instagram">📷</a>
+            <a href="https://tiktok.com" class="social-btn" title="TikTok">🎵</a>
+            <a href="https://facebook.com" class="social-btn" title="Facebook">f</a>
+            <a href="https://twitter.com" class="social-btn" title="Twitter">𝕏</a>
+            <a href="https://linkedin.com" class="social-btn" title="LinkedIn">in</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Let's Create Something Together</h2>
+        <div class="contact-content">
+            <div class="contact-card">
+                <div class="form-group">
+                    <label>Email</label>
+                    <a href="mailto:your-email@example.com" class="btn primary" style="width: 100%; text-align: center;">your-email@example.com</a>
+                </div>
+                <form style="margin-top: 2rem;">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label>Your Email</label>
+                        <input type="email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea placeholder="Tell me about your project..."></textarea>
+                    </div>
+                    <button type="submit" class="btn primary" style="width: 100%; cursor: pointer;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard" id="dashboard">
+        <h2 class="section-title">Personal Dashboard</h2>
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h4>📝 Quick Notes</h4>
+                <p>Capture ideas and thoughts on the fly</p>
+            </div>
+            <div class="dashboard-card">
+                <h4>💡 Content Ideas</h4>
+                <p>Brainstorm and organize new content concepts</p>
+            </div>
+            <div class="dashboard-card">
+                <h4>📊 Projects</h4>
+                <p>Track active and completed projects</p>
+            </div>
+            <div class="dashboard-card">
+                <h4>✅ Tasks</h4>
+                <p>Manage daily tasks and deadlines</p>
+            </div>
+            <div class="dashboard-card">
+                <h4>🔗 Useful Links</h4>
+                <p>Quick access to tools and resources</p>
+            </div>
+            <div class="dashboard-card">
+                <h4>⚡ Analytics</h4>
+                <p>Track performance and growth metrics</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="tools" id="tools">
+        <h2 class="section-title">My Creative Command Center</h2>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">🧠</div>
+                <h4>Content Ideas</h4>
+                <p>Generate new content concepts</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">✍️</div>
+                <h4>Writing Assistant</h4>
+                <p>Enhance your writing quality</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">📱</div>
+                <h4>Caption Generator</h4>
+                <p>Create engaging captions</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">▶️</div>
+                <h4>YouTube Titles</h4>
+                <p>Generate compelling titles</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">📹</div>
+                <h4>Video Planning</h4>
+                <p>Plan your next video</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">🎨</div>
+                <h4>Thumbnail Ideas</h4>
+                <p>Get thumbnail suggestions</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">📝</div>
+                <h4>Notes</h4>
+                <p>Quick note-taking tool</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">✅</div>
+                <h4>Task Manager</h4>
+                <p>Organize your workflow</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Anuj Pandit. All rights reserved. | Built with passion for creators</p>
+    </footer>
+
+    <script>
+        // Generate particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 20) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+
+        // Mobile hamburger
+        document.getElementById('hamburger').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>
