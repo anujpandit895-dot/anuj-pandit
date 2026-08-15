@@ -1,0 +1,35 @@
+name: Add Anuj profile photo
+on:
+  push:
+    paths:
+      - 'assets/profile-photo.txt'
+      - '.github/workflows/profile-photo.yml'
+permissions:
+  contents: write
+jobs:
+  update-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add profile photo to hero
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          css='''\n.hero{position:relative}.hero-profile{position:absolute;right:max(4vw,30px);top:50%;transform:translateY(-50%);width:min(36vw,470px);aspect-ratio:4/5;border:1px solid rgba(163,41,67,.7);border-radius:30px;overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.6),0 0 80px rgba(111,20,37,.18);z-index:2;background:#12090c}.hero-profile img{width:100%;height:100%;display:block;object-fit:cover;filter:saturate(.92) contrast(1.04)}.hero-profile:after{content:'ANUJ PANDIT · 04+ YEARS';position:absolute;left:18px;bottom:18px;padding:9px 12px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(8,8,8,.68);backdrop-filter:blur(12px);font:10px 'DM Mono',monospace;letter-spacing:.12em;color:#f4f1ed}.hero .container{position:relative;z-index:3}.hero .grid{z-index:0}.hero .orb{z-index:1}@media(max-width:900px){.hero-profile{position:relative;right:auto;top:auto;transform:none;width:min(78vw,390px);margin:55px auto 0}.hero{padding-bottom:70px}.hero .container{z-index:4}}\n'''
+          if '.hero-profile' not in s:
+              s=s.replace('</style>',css+'</style>')
+              s=s.replace('<div class="orb"></div><div class="container">','<div class="orb"></div><div class="hero-profile" aria-label="Anuj Pandit profile photo"><img id="profilePhoto" alt="Anuj Pandit profile photo"></div><div class="container">')
+              js='''\nfetch('assets/profile-photo.txt').then(r=>r.text()).then(b64=>{const i=document.getElementById('profilePhoto');if(i)i.src='data:image/jpeg;base64,'+b64.trim()}).catch(()=>{});\n'''
+              s=s.replace('</script>',js+'</script>')
+              p.write_text(s)
+          PY
+      - name: Commit site update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Add Anuj profile photo to website"
+          git push
